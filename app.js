@@ -6,14 +6,15 @@ var bodyParser = require('body-parser');
 var app = express();
 
 //bodyparser
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-//importsar rutas
+//importar rutas
+
 var appRoutes = require('./routes/app');
-var UserRoutes = require('./routes/User');
-var ClientRoutes = require('./routes/Client');
-var CategoryRoutes = require('./routes/Category');
+var usuarioRoutes = require('./routes/usuario');
+var loginRoutes = require('./routes/login');
 
 //coneccion a abse de datos
 mongoose.connection.openUri('mongodb://localhost:27017/InversionesThyago', (err, res) => {
@@ -22,9 +23,8 @@ mongoose.connection.openUri('mongodb://localhost:27017/InversionesThyago', (err,
 });
 
 // rutas
-app.use('/Client', ClientRoutes);
-app.use('/User', UserRoutes);
-app.use('/Category', CategoryRoutes);
+app.use('/usuario', usuarioRoutes);
+app.use('/login', loginRoutes);
 app.use('/', appRoutes);
 
 //puerto a redireccionar
