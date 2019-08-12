@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 var appRoutes = require('./routes/app');
 var usuarioRoutes = require('./routes/usuario');
 var loginRoutes = require('./routes/login');
+var sedeRoutes = require('./routes/sede');
 
 //coneccion a abse de datos
 mongoose.connection.openUri('mongodb://localhost:27017/InversionesThyago', (err, res) => {
@@ -25,6 +26,7 @@ mongoose.connection.openUri('mongodb://localhost:27017/InversionesThyago', (err,
 // rutas
 app.use('/usuario', usuarioRoutes);
 app.use('/login', loginRoutes);
+app.use('/sede', sedeRoutes);
 app.use('/', appRoutes);
 
 //puerto a redireccionar
