@@ -7,14 +7,19 @@ var app = express();
 var Sede = require('../models/sede');
 
 // ===============================
-//  Obtener datos de sede
+//  Obtener datos de las sede
 // ===============================
 app.get('/', (req, res, next) => {
+    var desde = req.query.desde || 0;
+    desde = Number(desde);
 
-    Sede.find({}, 'nombre email img rol')
+    Sede.find({})
+        .skip(desde)
+        .limit(5)
+        .populate('usuario', 'nombre email')
         .exec(
 
-            (err, sede) => {
+            (err, sedes) => {
 
                 if (err) {
                     return res.status(500).json({
@@ -23,10 +28,14 @@ app.get('/', (req, res, next) => {
                         errors: err
                     });
                 }
-                res.status(200).json({
-                    ok: true,
-                    sede: sede
-                });
+
+                Sede.count({}, (err, conteo) => {
+                    res.status(200).json({
+                        ok: true,
+                        sedes: sedes,
+                        total: conteo
+                    });
+                })
             })
 
 });
@@ -115,7 +124,7 @@ app.post('/', mdAutentificacion.verificaToken, (req, res) => {
     }),
 
     // ===============================
-    //  borrar usuario
+    //  borrar sede
     // ===============================
     app.delete('/:id', mdAutentificacion.verificaToken, (req, res) => {
 
