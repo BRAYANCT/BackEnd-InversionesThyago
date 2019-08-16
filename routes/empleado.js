@@ -123,7 +123,7 @@ app.post('/', mdAutentificacion.verificaToken, (req, res) => {
         })
 
 
-    }),
+    });
 
     // ===============================
     //  borrar usuario

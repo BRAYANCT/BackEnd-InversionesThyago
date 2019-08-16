@@ -20,6 +20,8 @@ var sedeRoutes = require('./routes/sede');
 var empleadoRoutes = require('./routes/empleado');
 var busquedaRoutes = require('./routes/busqueda');
 var uploadRoutes = require('./routes/upload');
+var categoriaRoutes = require('./routes/categoria');
+
 //coneccion a abse de datos
 mongoose.connection.openUri('mongodb://localhost:27017/InversionesThyago', (err, res) => {
     if (err) throw err;
@@ -39,6 +41,7 @@ app.use('/sede', sedeRoutes);
 app.use('/busqueda', busquedaRoutes);
 app.use('/upload', uploadRoutes);
 app.use('/imagenes', imagenespRoutes);
+app.use('/categoria', categoriaRoutes);
 app.use('/', appRoutes);
 
 
