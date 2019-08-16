@@ -54,21 +54,21 @@ app.post('/', mdAutentificacion.verificaToken, (req, res) => {
          cantidad:body.cantidad
    
     });
-    empleado.save((err, empleadoGuardado) => {
+    detalle.save((err, detalleGuardado) => {
 
         if (err) {
             return res.status(400).json({
                 ok: false,
-                mensaje: 'Error crear empleado',
+                mensaje: 'Error crear detalle',
                 errors: err
             });
         }
         res.status(201).json({
             ok: true,
-            empleado: empleadoGuardado,
+            detalle: detalleGuardado,
 
         });
     })
 
 
-}),
+})
